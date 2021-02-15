@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post '/auth/:provider/callback' => 'sessions#omniauth'
   devise_for :users
 
   resources :conversations do
