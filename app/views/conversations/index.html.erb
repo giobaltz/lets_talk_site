@@ -1,6 +1,17 @@
-<h1>My Inbox</h1>
 <%= button_to "Logout", destroy_user_session_path, method: :delete  %>
 <%= link_to '<button type="button">Posts</button>'.html_safe, new_post_path %>
+
+<h1>My Inbox</h1>
+<% @messages.each do |message| %>
+  <% if message.body %>
+    <div class="new_message">
+      <% if message.user_id!= current_user.id %>
+        <p> You have new messages! </p>
+        <% break %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
 
 <% @conversations.each do |conversation| %>
   <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
@@ -9,7 +20,7 @@
     <% else %>
       <% recipient = User.find(conversation.sender_id) %>
     <% end %>
-    <h3><%= link_to recipient.email, conversation_messages_path(conversation)%></h3>
+    <h5><%= link_to recipient.email, conversation_messages_path(conversation)%></h5>
   <% end %>
 <% end %>
 
@@ -19,11 +30,14 @@
     <% @users.each do |user| %>
       <% if user.id != current_user.id %>
         <div class="item">
-          <h3>
+          <h5>
           <%= link_to user.email, conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post"%>
-
-        </h3></div>
+        </h5></div>
       <% end %>
     <% end %>
   </div>
 </div>
+
+<script type="text/javascript">
+    setTimeout(() => { location.reload();}, 10000);
+</script>
