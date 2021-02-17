@@ -23,8 +23,10 @@
   </script>
   <%= button_to "Logout", destroy_user_session_path, method: :delete  %>
   <% @messages.each do |message| %>
-    <% message.seen = true  %>
-    <% message.save %>
+    <% if message.user_id!= current_user.id %>
+      <% message.seen = true  %>
+      <% message.save %>
+    <% end %>
     <% if message.body %>
       <% user = User.find(message.user_id) %>
       <div class="item">
@@ -42,6 +44,8 @@
   <% end %>
 </div>
 </div>
+<% @message.seen=false %>
+
 <div class="col-md-10 col-md-offset-1">
   <%= form_for [@conversation, @message] do |f| %>
     <div class="form-group">
