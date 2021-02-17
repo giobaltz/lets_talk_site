@@ -1,4 +1,6 @@
 <h1>All Posts</h1>
+<%= link_to '<button type="button">Create Post</button>'.html_safe, new_post_path %>
+<%= button_to "Search Posts", 'search', method: :get  %>
 <table>
   <tr>
     <th>User</th>

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :conversations do
     resources :messages
   end
+  get '/posts/search', to: 'posts#search', as: 'search_post_path'
+
   resources :posts
 
   root 'conversations#index'

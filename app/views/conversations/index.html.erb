@@ -1,5 +1,5 @@
 <%= button_to "Logout", destroy_user_session_path, method: :delete  %>
-<%= link_to '<button type="button">Posts</button>'.html_safe, new_post_path %>
+<%= button_to "Posts", 'posts/show', method: :get  %>
 
 <h1>My Inbox</h1>
 <% @messages.each do |message| %>
