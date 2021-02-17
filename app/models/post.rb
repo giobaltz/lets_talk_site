@@ -1,5 +1,4 @@
 class Post < ApplicationRecord
-  belongs_to :post
 
   def self.search(search)
     if search
