@@ -3,10 +3,10 @@ class SessionsController < ApplicationController
     @user = User.from_omniauth(auth)
     @user.save
     session[:user_id] = @user.id
-    redirect_to home_path
+    redirect_to 'conversations#index'
   end
 
-  private  
+  private
 
   def auth
     request.env['omniauth.auth']
